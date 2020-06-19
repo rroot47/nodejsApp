@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/semantic/semantic.min.css"
+    <title></title>
+    <style>
+        .main.container{
+            margin-top: 7em;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui fixed inverted menu">
+        <a href="/" class="header item">Acceuil</a>
+    </div>
+    <div class="ui main container">
+       
+        <% if(locals.flash && locals.flash.error){%>
+        
+            <div class="ui negative message">
+                <%= flash.error %>
+            </div>
+
+        <%}%>
+        <% if(locals.flash && locals.flash.success){%>
+        
+            <div class="ui positive message">
+                <%= flash.success %>
+            </div>
+
+        <%}%>
+        <form action="/" method="POST" class="ui form">
+            <div class="field">
+                <label for="message">Message</label>
+                <textarea name="message" id="message"></textarea>
+            </div>
+            <button type="submit" class="ui bleui labeled submit icon button">
+                <i class="icon edit"></i>Envoyer
+            </button>
+        </form>
+        <div class="ui comments">
+            <h3 class="ui dividing header">Commentaires</h3>
+            <%for(message of messages ){%>
+            <div class="comment">
+                <a class="avatar" href="/message/<%= message.id_message%>">
+                    <img src="https://randomuser.me/api/portraits/lego/7.jpg" alt="">
+                </a>
+                <div class="content">
+                    <div class="metadata">
+                        <div class="date">
+                            <%= message.creat_at.fromNow()%>
+                        </div>
+                    </div>
+                    <div class="test"><%= message.contents_message%></div>
+                </div>
+            </div>
+            <%}%>
+        </div>
+    </div>
+</body>
+</html>
